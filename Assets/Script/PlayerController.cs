@@ -5,6 +5,9 @@ using UnityEngine.Networking;
 
 public class PlayerController : NetworkBehaviour
 {
+	public GameObject bulletPrefab;
+	public Transform bulletSpawn;
+	
     // Start is called before the first frame update
     void Start()
     {
@@ -22,10 +25,24 @@ public class PlayerController : NetworkBehaviour
         float z = Input.GetAxis("Vertical")*Time.deltaTime*3.0f;
 		transform.Rotate(0,x,0);
 		transform.Translate(0,0,z);
+		if(Input.GetKeyDown(KeyCode.Space))
+		{
+			Fire();
+		}
+		
+		
 	}
+	
 	public override void OnStartLocalPlayer()
 	{
 		GetComponent<MeshRenderer>().material.color = Color.blue;
 	}
 	
+	void Fire(){
+		GameObject bullet = (GameObject) Instantiate(bulletPrefab,bulletSpawn.position,bulletSpawn.rotation);
+		//velocity
+		bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward*6.0f;
+		//destroy bullet after 2 sec
+		Destroy(bullet,2);
+	}
 }

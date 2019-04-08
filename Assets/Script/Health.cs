@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-usimg UnityEngine.Networking;
+using UnityEngine.Networking;
 
 
 public class Health : NetworkBehaviour
@@ -17,10 +17,11 @@ public class Health : NetworkBehaviour
 		{
 			return;
 		}
-		currentHealth -= amount;
+		currentHealth -=  amount;
 		if(currentHealth<=0)
 		{
-			currentHealth = 0;
+			currentHealth = maxHealth;
+			RpcRespawn();
 			Debug.Log("Dead");
 		}
 	}
@@ -29,6 +30,13 @@ public class Health : NetworkBehaviour
 		healthbar.sizeDelta = new Vector2(health*2,healthbar.sizeDelta.y);
 	
 	}
-		 
+	[ClientRpc]
+	void RpcRespawn()
+	{
+		if(isLocalPlayer)
+		{
+			transform.position = Vector3.zero;
+		}
+	}
 	
 }

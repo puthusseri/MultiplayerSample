@@ -53,6 +53,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Script\Bullet.cs" />
      <Compile Include="Assets\Script\PlayerController.cs" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>E:/MultiplayerSample/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>

@@ -27,7 +27,7 @@ public class PlayerController : NetworkBehaviour
 		transform.Translate(0,0,z);
 		if(Input.GetKeyDown(KeyCode.Space))
 		{
-			Fire();
+			CmdFire();
 		}
 		
 		
@@ -37,12 +37,15 @@ public class PlayerController : NetworkBehaviour
 	{
 		GetComponent<MeshRenderer>().material.color = Color.blue;
 	}
-	
-	void Fire(){
+	[Command]
+	void CmdFire(){
 		GameObject bullet = (GameObject) Instantiate(bulletPrefab,bulletSpawn.position,bulletSpawn.rotation);
 		//velocity
 		bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward*6.0f;
 		//destroy bullet after 2 sec
+		//spawn the bullet on clients
+		NetworkServer.Spawn(bullet);
+		
 		Destroy(bullet,2);
 	}
 }

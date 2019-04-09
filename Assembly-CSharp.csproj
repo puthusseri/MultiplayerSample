@@ -55,6 +55,7 @@
   <ItemGroup>
      <Compile Include="Assets\Script\Billboard.cs" />
      <Compile Include="Assets\Script\Bullet.cs" />
+     <Compile Include="Assets\Script\EnemySpawner.cs" />
      <Compile Include="Assets\Script\Health.cs" />
      <Compile Include="Assets\Script\PlayerController.cs" />
  <Reference Include="Unity.TextMeshPro.Editor">
